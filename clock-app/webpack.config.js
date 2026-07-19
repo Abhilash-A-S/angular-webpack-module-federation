@@ -3,7 +3,7 @@ const { shareAll, withModuleFederationPlugin } = require('@angular-architects/mo
 module.exports = withModuleFederationPlugin({
   name: 'clock-app',
   exposes: {
-    './Component': './src/app/app.ts',
+  "./ClockWidget": "./src/app/widgets/clock/clock.component/clock.component.ts"
   },
   shared: {
     ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),

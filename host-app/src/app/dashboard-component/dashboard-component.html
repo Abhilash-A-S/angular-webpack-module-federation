@@ -1,0 +1,15 @@
+<div class="dashboard">
+  <div class="left">
+    <app-remote-loader remoteEntry="http://localhost:4203/remoteEntry.js" exposedModule="./TodoWidget"
+      exportName="TodoWidgetComponent">
+    </app-remote-loader>
+  </div>
+  <div class="right">
+    <app-remote-loader remoteEntry="http://localhost:4201/remoteEntry.js" exposedModule="./ClockWidget"
+      exportName="ClockWidgetComponent">
+    </app-remote-loader>
+    <app-remote-loader remoteEntry="http://localhost:4202/remoteEntry.js" exposedModule="./HistoryWidget"
+      exportName="HistoryWidgetComponent">
+    </app-remote-loader>
+  </div>
+</div>
