@@ -1,0 +1,137 @@
+    /* ==========================================================================
+   RESET & GLOBAL VARIABLES
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+}
+
+:root {
+  --bg-shell: #12161a;
+  --bg-card: #1b2126;
+  --bg-card-light: #f0f4f8;
+  --border-color: #2a333c;
+  --text-main: #ffffff;
+  --text-muted: #8a99a8;
+  --accent-blue: #3b82f6;
+  --accent-orange: #d97706;
+  --bg-orange-alert: #3a2212;
+  --border-orange-alert: #b45309;
+}
+
+body {
+  background-color: #0d0f12;
+  color: var(--text-main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+/* ==========================================================================
+   HOST LAYOUT (SHELL CONTAINER)
+   ========================================================================== */
+.dashboard-shell {
+  width: 100%;
+  max-width: 1200px;
+  background-color: var(--bg-shell);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.global-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-text {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.main-nav {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-item {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.nav-item.active, .nav-item:hover {
+  color: var(--text-main);
+  border-bottom-color: var(--accent-blue);
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  background-color: #c7d2fe;
+  color: #4338ca;
+  font-weight: bold;
+  font-size: 0.85rem;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.username {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.settings-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+/* Workspace Multi-Column Core Grid Setup */
+.workspace-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 20px;
+  padding: 24px;
+}
+
+.sidebar-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Shared MFE Container Card Styling */
+.mfe-container {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 24px;
+}
