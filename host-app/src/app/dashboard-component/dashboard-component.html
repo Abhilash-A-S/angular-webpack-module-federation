@@ -1,15 +1,40 @@
-<div class="dashboard">
-  <div class="left">
-    <app-remote-loader remoteEntry="http://localhost:4203/remoteEntry.js" exposedModule="./TodoWidget"
+  <div class="dashboard-shell">
+    <header class="global-header">
+      <div class="logo-area">
+        <span class="icon">⏱️</span>
+        <span class="logo-text">TaskFlow</span>
+      </div>
+      <nav class="main-nav">
+        <a href="#" class="nav-item active">Dashboard</a>
+        <a href="#" class="nav-item">My Tasks</a>
+        <a href="#" class="nav-item">Calendar</a>
+        <a href="#" class="nav-item">Reports</a>
+        <a href="#" class="nav-item">History</a>
+      </nav>
+      <div class="user-profile">
+        <span class="avatar">AS</span>
+        <span class="username">Alistair Smith</span>
+        <button class="settings-btn">⚙️</button>
+      </div>
+    </header>
+
+    <main class="workspace-grid">
+            <section class="mfe-container todo-workspace">
+                  <app-remote-loader remoteEntry="http://localhost:4203/remoteEntry.js" exposedModule="./TodoWidget"
       exportName="TodoWidgetComponent">
     </app-remote-loader>
-  </div>
-  <div class="right">
+</section>
+
+          <div class="sidebar-column">
     <app-remote-loader remoteEntry="http://localhost:4201/remoteEntry.js" exposedModule="./ClockWidget"
       exportName="ClockWidgetComponent">
+    </app-remote-loader>
+    <app-remote-loader remoteEntry="http://localhost:4201/remoteEntry.js" exposedModule="./Alertbanner"
+      exportName="AlertBannerComponent">
     </app-remote-loader>
     <app-remote-loader remoteEntry="http://localhost:4202/remoteEntry.js" exposedModule="./HistoryWidget"
       exportName="HistoryWidgetComponent">
     </app-remote-loader>
+      </div>
+    </main>
   </div>
-</div>

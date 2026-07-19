@@ -1,0 +1,74 @@
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  padding-left: 12px;
+}
+
+/* Vertical structural line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 52px;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background-color: var(--border-color);
+}
+
+.timeline-item {
+  display: flex;
+  gap: 24px;
+  position: relative;
+}
+
+.timeline-item .time {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  width: 40px;
+  text-align: right;
+  padding-top: 2px;
+}
+
+/* Standard timeline circle dot node */
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  left: 49px;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--text-muted);
+  z-index: 2;
+}
+
+/* Checkmark node for completed history elements */
+.timeline-item.status-checked::after {
+  content: '✓';
+  position: absolute;
+  left: 45px;
+  top: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--accent-blue);
+  color: white;
+  font-size: 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.timeline-content strong {
+  font-size: 0.9rem;
+  display: block;
+}
+
+.timeline-content p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
