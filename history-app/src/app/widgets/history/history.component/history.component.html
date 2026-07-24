@@ -1,25 +1,14 @@
 <section class="mfe-container history-widget">
   <h3 class="widget-title">My Task History</h3>
   <div class="timeline">
-    <div class="timeline-item">
-      <span class="time">14:15</span>
+    <div 
+      *ngFor="let item of historyEntries" 
+      class="timeline-item"
+      [class.status-checked]="item.action === 'COMPLETED'">
+      <span class="time">{{ item.timestamp }}</span>
       <div class="timeline-content">
-        <strong>Submit regional report</strong>
-        <p>(Assigned by Alistair Smith)</p>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <span class="time">13:50</span>
-      <div class="timeline-content">
-        <strong>Review pull request</strong>
-        <p>(Completed)</p>
-      </div>
-    </div>
-    <div class="timeline-item status-checked">
-      <span class="time">12:30</span>
-      <div class="timeline-content">
-        <strong>Draft team announcement</strong>
-        <p>(Marked Complete by Alistair Smith)</p>
+        <strong>{{ item.taskTitle }}</strong>
+        <p>({{ item.details }})</p>
       </div>
     </div>
   </div>
