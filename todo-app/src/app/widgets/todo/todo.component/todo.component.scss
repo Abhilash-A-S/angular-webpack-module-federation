@@ -13,10 +13,12 @@
   display: flex;
   gap: 10px;
   margin-bottom: 24px;
+  flex-wrap: wrap;
 }
 
 .task-input {
   flex: 1;
+  min-width: 200px;
   background-color: #222930;
   border: 1px solid var(--border-color);
   border-radius: 6px;
@@ -24,6 +26,7 @@
   color: var(--text-main);
 }
 
+.date-picker-wrapper,
 .time-picker-wrapper {
   background-color: #222930;
   border: 1px solid var(--border-color);
@@ -33,12 +36,32 @@
   padding: 0 10px;
 }
 
+.date-select,
 .time-select {
   background: transparent;
   border: none;
   color: var(--text-main);
   outline: none;
   cursor: pointer;
+  font-size: 0.9rem;
+  color-scheme: dark;
+}
+
+.flag-toggle-btn {
+  background-color: #222930;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 0 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+
+  &.is-critical {
+    border-color: #ef4444;
+    background-color: rgba(239, 68, 68, 0.15);
+  }
 }
 
 .add-btn {
@@ -49,6 +72,11 @@
   width: 44px;
   border-radius: 6px;
   cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #2d363f;
+  }
 }
 
 /* Task Row Element Items */
@@ -66,6 +94,7 @@
   border-radius: 8px;
   padding: 16px;
   gap: 12px;
+  transition: border-color 0.3s;
 }
 
 /* Custom Checkbox Setup */
@@ -92,15 +121,43 @@
   width: 18px;
   border: 2px solid var(--text-muted);
   border-radius: 4px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    display: none;
+    left: 5px;
+    top: 2px;
+    width: 4px;
+    height: 9px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
 }
 
 .checkbox-container input:checked ~ .checkmark {
   background-color: var(--accent-blue);
   border-color: var(--accent-blue);
+
+  &::after {
+    display: block;
+  }
 }
 
 .task-text {
   font-size: 0.95rem;
+}
+
+.task-flag {
+  cursor: pointer;
+  user-select: none;
+  font-size: 0.95rem;
+  transition: transform 0.15s;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 }
 
 .task-time {
@@ -142,10 +199,15 @@
   border-radius: 6px;
   font-size: 0.85rem;
   cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba(245, 158, 11, 0.2);
+  }
 }
 
 .task-item.completed {
-  opacity: 0.4;
+  opacity: 0.45;
 }
 
 .task-item.completed .task-text {

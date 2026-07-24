@@ -1,67 +1,86 @@
 <div class="section-header">
   <h2>My Tasks</h2>
-  <p class="subtitle">4 active • 1 critical</p>
+  <p class="subtitle">{{ activeCount }} active • {{ criticalCount }} critical</p>
 </div>
 
 <!-- Add Task Bar -->
 <div class="add-task-bar">
-  <input type="text" placeholder="Add a task..." class="task-input">
-  <div class="time-picker-wrapper">
-    <select class="time-select">
-      <option>14:30</option>
-      <option>15:00</option>
-      <option>16:00</option>
-    </select>
+  <input 
+    type="text" 
+    placeholder="Add a task..." 
+    class="task-input"
+    [(ngModel)]="newTaskTitle"
+    (keyup.enter)="addTask()">
+  
+  <div class="date-picker-wrapper">
+    <input 
+      class="date-select" 
+      type="date" 
+      [(ngModel)]="newTaskDate" 
+      [min]="minDateString"
+      (change)="onDateChange()">
   </div>
-  <button class="add-btn">+</button>
+
+  <div class="time-picker-wrapper">
+    <input 
+      class="time-select" 
+      type="time" 
+      [(ngModel)]="newTaskTime"
+      [min]="minTimeString">
+  </div>
+
+  <button 
+    class="flag-toggle-btn" 
+    [class.is-critical]="newTaskCritical" 
+    (click)="toggleNewTaskCritical()"
+    title="Toggle Critical Priority">
+    🚩
+  </button>
+
+  <button class="add-btn" (click)="addTask()">+</button>
 </div>
 
 <!-- Task Items List -->
 <div class="task-list">
-  <!-- Item 1 -->
-  <div class="task-item">
+  <div 
+    *ngFor="let task of tasks" 
+    class="task-item" 
+    [class.due-now]="task.isDue && !task.completed"
+    [class.completed]="task.completed">
+    
     <label class="checkbox-container">
-      <input type="checkbox">
+      <input 
+        type="checkbox" 
+        [checked]="task.completed" 
+        (change)="toggleTaskComplete(task)">
       <span class="checkmark"></span>
-      <span class="task-text">Submit regional report</span>
+      <span class="task-text">{{ task.title }}</span>
     </label>
-    <span class="task-flag red-flag">🚩</span>
-    <span class="task-time">14:30</span>
-  </div>
 
-  <!-- Item 2 (Active/Due Alert State) -->
-  <div class="task-item due-now">
-    <label class="checkbox-container">
-      <input type="checkbox">
-      <span class="checkmark"></span>
-      <span class="task-text">Prepare for standup</span>
-    </label>
-    <span class="task-flag orange-flag">🚩</span>
-    <div class="due-badge-group">
-      <span class="time-stamp">14:30</span>
-      <span class="badge">DUE NOW</span>
-    </div>
-    <button class="action-btn">Reschedule +5m</button>
-  </div>
+    <span 
+      class="task-flag" 
+      [class.red-flag]="task.critical && !task.completed" 
+      [class.orange-flag]="!task.critical && !task.completed"
+      [class.green-flag]="task.completed"
+      (click)="toggleTaskCritical(task)"
+      title="Click to toggle Critical priority">
+      🚩
+    </span>
 
-  <!-- Item 3 -->
-  <div class="task-item">
-    <label class="checkbox-container">
-      <input type="checkbox">
-      <span class="checkmark"></span>
-      <span class="task-text">Review pull request</span>
-    </label>
-    <span class="task-flag orange-flag">🚩</span>
-    <span class="task-time">17:00</span>
-  </div>
+    <ng-container *ngIf="!task.completed">
+      <div *ngIf="task.isDue && !task.completed" class="due-badge-group">
+        <span class="time-stamp">{{ task.dueTime }}</span>
+        <span class="badge">DUE NOW</span>
+      </div>
 
-  <!-- Item 4 (Completed) -->
-  <div class="task-item completed">
-    <label class="checkbox-container">
-      <input type="checkbox" checked disabled>
-      <span class="checkmark"></span>
-      <span class="task-text">Draft team announcement</span>
-    </label>
-    <span class="task-flag green-flag">🚩</span>
+      <button 
+        *ngIf="task.isDue && !task.completed" 
+        class="action-btn" 
+        (click)="rescheduleTask(task)">
+        Reschedule +5m
+      </button>
+
+      <span *ngIf="!task.isDue" class="task-time">{{ task.dueTime }}</span>
+    </ng-container>
   </div>
 </div>
